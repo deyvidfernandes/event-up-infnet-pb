@@ -1,0 +1,16 @@
+.customButton {
+  background-color: rgb(8, 109, 84);
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.397);
+
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  padding-inline: 32px;
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}

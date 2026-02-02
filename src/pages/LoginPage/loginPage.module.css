@@ -1,0 +1,19 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    background: url('/cover.png') center/cover no-repeat;
+  }
+  .image-section {
+    display: none !important;
+  }
+  .login-section {
+    background-color: rgba(255, 255, 255, 0.85); /* Efeito blur/overlay no mobile */
+    width: 100%;
+  }
+}

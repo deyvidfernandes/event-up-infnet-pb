@@ -1,0 +1,65 @@
+.productCardWrapper {
+  flex-grow: 1;
+  max-width: 350px;
+  display: flex;
+  align-items: stretch;
+}
+
+.productListContainer {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  gap: 32px;
+}
+
+.productInfo {
+  font-weight: 600;
+  line-height: 1.25;
+  & span {
+    font-weight: 400;
+  }
+}
+
+.errorLabel {
+  color: red;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input {
+  background-color: rgb(255, 255, 255);
+  border: none; 
+  height: 35px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  padding-block: 10px;
+  padding-left: 10px;
+}
+
+.btnLogin {
+  background-color: rgb(8, 109, 84);
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.397);
+
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+}
+
+.formInput {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 8px;
+}
