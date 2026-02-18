@@ -5,15 +5,45 @@
   max-width: 600px;
 }
 
+.pageContainer {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.imageSection {
+  flex: 1;
+  background: url('/cover.png') center / cover no-repeat;
+  display: block;
+}
+
+.loginSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.loginContent {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
-  .login-page {
+  .loginPage {
     background: url('/cover.png') center/cover no-repeat;
   }
-  .image-section {
+  .imageSection {
     display: none !important;
   }
-  .login-section {
-    background-color: rgba(255, 255, 255, 0.85); /* Efeito blur/overlay no mobile */
+  .loginSection {
+    background-color: rgba(255, 255, 255, 0.65); /* Efeito blur/overlay no mobile */
     width: 100%;
   }
 }
