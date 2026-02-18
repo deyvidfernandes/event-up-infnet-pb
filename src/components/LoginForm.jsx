@@ -13,7 +13,7 @@ const schema = yup.object({
     .email("O email inserido é inválido"),
   password: yup
     .string()
-    .min(8, "A senha precisa tem pelo menos 8 caracteres")
+    .min(8, "A senha precisa ter pelo menos 8 caracteres")
     .required() 
 });
 
