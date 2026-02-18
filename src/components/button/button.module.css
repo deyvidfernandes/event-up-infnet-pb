@@ -1,5 +1,5 @@
 .customButton {
-  background-color: rgb(8, 109, 84);
+  background-color: var(--primaryColor);
   height: 35px;
   border: none;
   border-radius: 8px;

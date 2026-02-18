@@ -41,12 +41,12 @@ input {
 
 input:focus {
   outline: none;
-  border: 2px solid rgb(8, 109, 84);
+  border: 2px solid var(--primaryColor);
   transition: 0.2s ease-in-out;
 }
 
 .btnLogin {
-  background-color: rgb(8, 109, 84);
+  background-color: var(--primaryColor);
   height: 35px;
   border: none;
   border-radius: 8px;
