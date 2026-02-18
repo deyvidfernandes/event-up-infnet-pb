@@ -15,7 +15,7 @@
 .imageSection {
   flex: 1;
   background: url('/cover.png') center / cover no-repeat;
-  display: block;
+  display: none;
 }
 
 .loginSection {
@@ -24,7 +24,8 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.65);
+  width: 100%;
 }
 
 .loginContent {
@@ -35,15 +36,18 @@
   text-align: center;
 }
 
-@media (max-width: 768px) {
+.loginPage {
+  background: url('/cover.png') center/cover no-repeat;
+}
+
+@media (min-width: 768px) {
   .loginPage {
-    background: url('/cover.png') center/cover no-repeat;
+    background: none
   }
   .imageSection {
-    display: none !important;
+    display: block;
   }
   .loginSection {
-    background-color: rgba(255, 255, 255, 0.65); /* Efeito blur/overlay no mobile */
-    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
   }
 }
