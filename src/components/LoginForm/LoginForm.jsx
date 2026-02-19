@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router";
 import { login } from "../../util/mockLocalStorage";
 import Button from "../button/Button";
+import Link from "../Link/Link";
 
 const schema = yup.object({
   user: yup
@@ -67,6 +68,7 @@ export default function LoginForm() {
             >
               Entrar
             </Button>
+            <Link>Não tenho uma conta</Link>
         </form>
     </main>
   );
