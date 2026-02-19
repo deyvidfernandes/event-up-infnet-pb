@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import { RouterProvider } from "react-router/dom";
-import Layout from "../pages/Layout.jsx";
-import LoginPage from "../pages/LoginPage/LoginPage.jsx";
-import { ProtectedRoute, PublicRoute } from "./AuthGuard.jsx";
-import HomePage from "../pages/HomePage/HomePage.jsx";
+import { RouterProvider } from "react-router/";
+import Layout from "../pages/Layout.js";
+import LoginPage from "../pages/LoginPage/LoginPage.js";
+import { ProtectedRoute, PublicRoute } from "./AuthGuard.js";
+import HomePage from "../pages/HomePage/HomePage.js";
 
 const router = createBrowserRouter([
   {

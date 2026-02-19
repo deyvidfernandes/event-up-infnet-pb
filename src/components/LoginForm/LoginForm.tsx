@@ -36,7 +36,7 @@ export default function LoginForm() {
   const { user, password} = watch();
 
   const handleLogin = () => {
-    login()
+    login({})
     navigate("/u")
   }
 
@@ -68,7 +68,7 @@ export default function LoginForm() {
             >
               Entrar
             </Button>
-            <Link>Não tenho uma conta</Link>
+            <Link >Não tenho uma conta</Link>
         </form>
     </main>
   );
