@@ -68,7 +68,7 @@ export default function LoginForm() {
             >
               Entrar
             </Button>
-            <Link >Não tenho uma conta</Link>
+            <Link href="/signup">Não tenho uma conta</Link>
         </form>
     </main>
   );
