@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "jsx": "react-jsx",
-        "composite": true
+        "composite": true,
+        "outDir": "./dist",
+        "declaration": true
     }
 }
