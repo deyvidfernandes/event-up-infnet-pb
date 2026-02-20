@@ -1,0 +1,29 @@
+.errorLabel {
+  color: red;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input {
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  height: 35px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  padding-block: 10px;
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid var(--primaryColor);
+  transition: 0.2s ease-in-out;
+}
+
+.formInput {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  gap: 4px;
+}
