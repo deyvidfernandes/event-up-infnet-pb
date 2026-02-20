@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import { RouterProvider } from "react-router/";
+import { RouterProvider } from "react-router";
 import Layout from "../pages/Layout.js";
-import LoginPage from "../pages/LoginPage/LoginPage.js";
+import AccountPage from "../pages/AccountPage/AccountPage.js";
 import { ProtectedRoute, PublicRoute } from "./AuthGuard.js";
 import HomePage from "../pages/HomePage/HomePage.js";
 
@@ -16,7 +16,11 @@ const router = createBrowserRouter([
       {
         path: "login",
         index: true,
-        element: <PublicRoute><LoginPage /></PublicRoute>
+        element: <PublicRoute><AccountPage view="login"/></PublicRoute>
+      },
+      {
+        path: "signup",
+        element: <PublicRoute><AccountPage view='signup'/></PublicRoute>
       },
       {
         path: "u",
