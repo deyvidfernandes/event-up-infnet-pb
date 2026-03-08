@@ -1,6 +1,6 @@
 import { Navigate, useNavigate } from "react-router";
-import Button from "../../components/button/Button";
-import { logout } from "../../util/mockLocalStorage";
+import Button from "../../lib/ui/Button/Button";
+import { logout } from "../../lib/util/mockLocalStorage";
 
 export default function HomePage() {
     const navigate = useNavigate();

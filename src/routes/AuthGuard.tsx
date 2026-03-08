@@ -1,5 +1,5 @@
 import { Navigate } from "react-router";
-import { isLogged } from "../util/mockLocalStorage";
+import { isLogged } from "../lib/util/mockLocalStorage";
 
 export function ProtectedRoute({ children }) {
   if (!isLogged()) {

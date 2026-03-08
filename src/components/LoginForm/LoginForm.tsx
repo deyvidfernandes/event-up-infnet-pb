@@ -4,9 +4,9 @@ import styles from "./login.module.css";
 
 import * as yup from "yup";
 import { useNavigate } from "react-router";
-import { login } from "../../util/mockLocalStorage";
-import Button from "../button/Button";
-import Link from "../Link/Link";
+import { login } from "../../lib/util/mockLocalStorage";
+import Button from "../../lib/ui/Button/Button";
+import Link from "../../lib/ui/Link/Link";
 
 const schema = yup.object({
   user: yup
