@@ -1,0 +1,160 @@
+:root {
+  --sidebar-closed: 85px;
+  --sidebar-opened: 260px;
+  --primary-color: var(--primaryColor);
+  --icons-color: var(--primaryColor-100);
+  --bg-color: hsl(0, 0%, 92%);
+}
+
+/* --- CONFIGURAÇÃO MOBILE (PADRÃO) --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Escondida fora da tela à esquerda */
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-color);
+  z-index: 9999;
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 40px 20px;
+}
+
+.sidebar.expanded {
+  left: 0;
+}
+
+.sidebar.expanded .linkText, 
+.sidebar.expanded .title {
+  opacity: 1;
+}
+
+/* --- CONFIGURAÇÃO DESKTOP (TABLETS PARA CIMA) --- */
+@media (min-width: 768px) {
+  .sidebar {
+    left: 0;
+    width: 85px;
+    height: 100%;
+    padding: 20px 0;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.103);
+  }
+
+  .sidebar.expanded {
+    width: 260px;
+  }
+}
+
+.sidebarHeaders {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+}
+
+.sidebarHeaders img {
+  min-width: var(--sidebar-closed);
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: black;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.expanded .title {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.sidebarLinks {
+  list-style: none;
+  margin-top: 20px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebarLinks::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebarLinks li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-color);
+  height: 55px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebarLinks li a:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.sidebarLinks i {
+  min-width: var(--sidebar-closed); 
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--icons-color);
+  flex-shrink: 0; /* Não deixa o ícone achatar */
+}
+
+.linkText {
+  opacity: 0;
+  white-space: nowrap;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sidebar.expanded .linkText {
+  opacity: 1;
+  transition-delay: 0.2s;
+  pointer-events: auto;
+}
+
+.sidebarLinks h4 {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-top: 15px;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+.sidebarLinks h4 span {
+  opacity: 0;
+  padding-left: 25px;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.expanded .sidebarLinks h4 span {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.menuSeparator {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: var(--primary-color);
+  opacity: 0.2;
+  transition: all 0.4s ease;
+}
+
+.sidebar.expanded .menuSeparator {
+  opacity: 0;
+  left: 25px;
+  right: 25px;
+}

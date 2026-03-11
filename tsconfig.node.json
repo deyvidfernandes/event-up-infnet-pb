@@ -3,6 +3,11 @@
         "jsx": "react-jsx",
         "composite": true,
         "outDir": "./dist",
-        "declaration": true
-    }
+        "declaration": true,
+        "skipLibCheck": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowSyntheticDefaultImports": true
+    },
+    "include": ["vite.config.ts"]
 }

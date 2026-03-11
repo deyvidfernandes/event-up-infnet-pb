@@ -1,9 +1,10 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { RouterProvider } from "react-router";
-import Layout from "../pages/Layout.js";
-import AccountPage from "../pages/AccountPage/AccountPage.js";
-import { ProtectedRoute, PublicRoute } from "./AuthGuard.js";
-import HomePage from "../pages/HomePage/HomePage.js";
+import Layout from "../pages/layouts/Layout";
+import AccountPage from "../pages/AccountPage/AccountPage";
+import { ProtectedRoute, PublicRoute } from "./AuthGuard";
+import HomePage from "../pages/HomePage/HomePage";
+import HubLayout from "../pages/layouts/HubLayout/HubLayout";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "u",
-        element: <ProtectedRoute><Layout /></ProtectedRoute>,
+        element: <ProtectedRoute><HubLayout /></ProtectedRoute>,
         children: [
           {
             index: true,

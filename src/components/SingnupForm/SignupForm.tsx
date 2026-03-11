@@ -64,7 +64,7 @@ export default function SignupForm() {
         <form className={styles.formContainer}>
           <FormInputField 
             value={nameInput}
-            onChange={(event) => setValue("user", event.target.value)}
+            onChange={(event) => setValue("nameInput", event.target.value)}
             placeholder="Como você se chama?"
             type="text"
             errorMessage={errors.nameInput?.message}
@@ -73,7 +73,7 @@ export default function SignupForm() {
             value={user}
             onChange={(event) => setValue("user", event.target.value)}
             placeholder="Insira seu melhor Email"
-            type="email"
+            type="text"
             errorMessage={errors.user?.message}
           />
           <FormInputField 
@@ -81,7 +81,7 @@ export default function SignupForm() {
             mask="(##) #####-####"
             onChange={(event) => setValue("phone", event.target.value)}
             placeholder="Insira seu telefone"
-            type="string"
+            type="text"
             errorMessage={errors.phone?.message}
           />
           <FormInputField 
