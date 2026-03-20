@@ -1,5 +1,5 @@
-import LoginForm from "../../components/LoginForm/LoginForm";
-import SignupForm from "../../components/SingnupForm/SignupForm";
+import LoginForm from "../../components/features/LoginForm/LoginForm";
+import SignupForm from "../../components/features/SingnupForm/SignupForm";
 import styles from "./accountPage.module.css"
 
 type AccountPageProps = {

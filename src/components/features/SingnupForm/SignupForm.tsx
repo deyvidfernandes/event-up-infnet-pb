@@ -4,9 +4,9 @@ import styles from "./signup.module.css";
 
 import * as yup from "yup";
 import { useNavigate } from "react-router";
-import { login } from "../../lib/util/mockLocalStorage";
-import Button from "../../lib/ui/Button/Button";
-import Link from "../../lib/ui/Link/Link";
+import { login } from "../../../lib/util/mockLocalStorage";
+import Button from "../../ui/Button/Button";
+import Link from "../../ui/Link/Link";
 import FormInputField from "../FormInputField/FormInputField";
 
 const phoneRegExp = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;

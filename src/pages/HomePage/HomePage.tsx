@@ -1,5 +1,5 @@
 import { Navigate, useNavigate } from "react-router";
-import Button from "../../lib/ui/Button/Button";
+import Button from "../../components/ui/Button/Button";
 import { logout } from "../../lib/util/mockLocalStorage";
 
 export default function HomePage() {
