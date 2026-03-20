@@ -33,10 +33,14 @@ export default function LoginForm() {
     resolver: yupResolver(schema),
   });
 
-  const { user, password} = watch();
+  const { user, password } = watch();
 
   const handleLogin = () => {
-    login({})
+    login({
+      email: user!,
+      nome: "mock",
+      accountType: "organizador"
+    })
     navigate("/u")
   }
 

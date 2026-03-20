@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import Routes from "./routes/routes";
 import './global.css'
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root")!;
 const root = createRoot(rootElement);
 
 root.render(

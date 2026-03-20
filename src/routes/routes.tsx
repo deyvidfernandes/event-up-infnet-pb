@@ -4,7 +4,7 @@ import Layout from "../pages/layouts/Layout";
 import AccountPage from "../pages/AccountPage/AccountPage";
 import { ProtectedRoute, PublicRoute } from "./AuthGuard";
 import HomePage from "../pages/HomePage/HomePage";
-import HubLayout from "../pages/layouts/HubLayout/HubLayout";
+import HubLayout from "../pages/layouts/HubLayout";
 
 const router = createBrowserRouter([
   {

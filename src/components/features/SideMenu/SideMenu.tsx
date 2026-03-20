@@ -1,44 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import useClickOutside from "@/hooks/useClickOutside";
 import styles from "./SideMenu.module.css";
+import { MenuGroup } from './types';
 
-interface MenuLink {
-    icon: string;
-    label: string;
-    path: string;
+type SideMenuProps = {
+    menuGroups: MenuGroup[]
 }
 
-interface MenuGroup {
-    title: string;
-    links: MenuLink[];
-}
-
-const menuGroups: MenuGroup[] = [
-    {
-        title: "Eventos",
-        links: [
-            { icon: "fa-chart-simple", label: "Painel", path: "#" },
-            { icon: "fa-plus-circle", label: "Novo", path: "#" },
-            { icon: "fa-list-check", label: "Gerenciar", path: "#" }, 
-        ]
-    },
-    {
-        title: "Administração",
-        links: [
-            { icon: "fa-envelope", label: "Mensagens", path: "#" },
-        ]
-    },
-    {
-        title: "Conta",
-        links: [
-            { icon: "fa-id-card", label: "Dados", path: "#" },
-            { icon: "fa-sliders", label: "Preferências", path: "#" },
-            { icon: "fa-right-from-bracket", label: "Sair", path: "#" },
-        ]
-    }
-];
-
-export function SideMenu() {
+export function SideMenu({menuGroups}: SideMenuProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
