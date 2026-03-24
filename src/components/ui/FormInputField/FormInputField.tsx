@@ -1,28 +1,30 @@
 import styles from "./formField.module.css";
-import { InputHTMLAttributes, ReactNode } from "react";
+import { InputHTMLAttributes } from "react";
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 
-interface ComponentProps extends Omit<PatternFormatProps, 'format'> {
-  errorMessage?: ReactNode;
-  mask?: string; // Ex: "(##) #####-####";
+interface ComponentProps extends PatternFormatProps {
+  errorMessage?: string;
+  mask?: string;
 }
 
 export default function FormInputField({
   errorMessage,
   mask,
-  ...props
-}: ComponentProps) {
+  ...rest
+}: ComponentProps) 
+
+{
   return (
     <div className={styles.formInput}>
       {mask ? (
         <PatternFormat
-          {...props}
+          {...rest}
           format={mask}
           mask="_"
-          customInput="input" // Diz para usar um input comum
+          customInput={(props) => <input {...props} />} // ComponentType<InputAttributes> exige algo redenrizável
         />
       ) : (
-        <input {...props} />
+        <input {...rest as InputHTMLAttributes<HTMLInputElement>} />
       )}
       
       {errorMessage && (
