@@ -2,7 +2,7 @@ import styles from "./formField.module.css";
 import { InputHTMLAttributes } from "react";
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 
-interface ComponentProps extends PatternFormatProps {
+interface ComponentProps extends Omit<PatternFormatProps, "format"> {
   errorMessage?: string;
   mask?: string;
 }
