@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { login } from "../../../lib/util/mockLocalStorage";
 import Button from "../../ui/Button/Button";
 import Link from "../../ui/Link/Link";
-import FormInputField from "../FormInputField/FormInputField";
+import FormInputField from "../../ui/FormInputField/FormInputField";
 
 const phoneRegExp = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
 
@@ -55,7 +55,11 @@ export default function SignupForm() {
   const { user, password, nameInput, phone, verifyPassword} = watch();
 
   const handleLogin = () => {
-    login({})
+    login({
+      email: user!,
+      nome: "mock",
+      accountType: "organizador"
+    })
     navigate("/u")
   }
 
