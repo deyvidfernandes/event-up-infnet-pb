@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import useClickOutside from "@/hooks/useClickOutside";
 import styles from "./SideMenu.module.css";
 import { MenuGroup } from './types';
+import { getLoggedUser } from '@/lib/util/mockLocalStorage';
+import {Link} from 'react-router';
 
 type SideMenuProps = {
     menuGroups: MenuGroup[]
@@ -12,6 +14,9 @@ export function SideMenu({menuGroups}: SideMenuProps) {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sidebarRef = useRef<HTMLElement>(null);
+    const accessType = getLoggedUser()!.accountType
+
+    // UX
 
     useEffect(() => {
         const handleResize = () => setIsDesktop(window.innerWidth > 768);
@@ -35,9 +40,16 @@ export function SideMenu({menuGroups}: SideMenuProps) {
 
     useClickOutside(sidebarRef, () => setIsExpanded(false), isExpanded);
 
+
+    // ACESSOS
+
+    const filteredMenuGroups = menuGroups.filter(mg => mg.allowed === accessType)
+
+    // RENDERIZAÇÃO
+
     return (
         <>
-            {/* Botão Hambúrguer visível apenas no Mobile */}
+            {/* Botão Hambúrguer no Mobile */}
             <button className={styles.mobileMenuBtn} onClick={toggleMenu}>
                 <i className="fa-solid fa-bars"></i>
             </button>
@@ -60,7 +72,7 @@ export function SideMenu({menuGroups}: SideMenuProps) {
                 </div>
 
                 <ul className={styles.sidebarLinks}>
-                    {menuGroups.map((group, groupIndex) => (
+                    {filteredMenuGroups .map((group, groupIndex) => (
                         <div key={groupIndex}>
                             <h4>
                                 <span>{group.title}</span>
@@ -68,12 +80,12 @@ export function SideMenu({menuGroups}: SideMenuProps) {
                             </h4>
                             {group.links.map((link, linkIndex) => (
                                 <li key={linkIndex}>
-                                    <a href={link.path}>
+                                    <Link to={link.path}>
                                         <div className={styles.iconContainer}>
                                             <i className={`fa-solid ${link.icon}`}></i>
                                         </div>
                                         <span className={styles.linkText}>{link.label}</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </div>

@@ -6,8 +6,8 @@ const menuGroups: MenuGroup[] = [
     {
         title: "Eventos",
         links: [
-            { icon: "fa-chart-simple", label: "Painel", path: "#" },
-            { icon: "fa-plus-circle", label: "Novo", path: "#" },
+            { icon: "fa-chart-simple", label: "Painel", path: "/u/home" },
+            { icon: "fa-plus-circle", label: "Novo", path: "/u/novo-evento" },
             { icon: "fa-list-check", label: "Gerenciar", path: "#" }, 
         ],
         allowed: "organizador"
