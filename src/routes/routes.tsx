@@ -5,6 +5,7 @@ import AccountPage from "../pages/AccountPage/AccountPage";
 import { ProtectedRoute, PublicRoute } from "./AuthGuard";
 import HomePage from "../pages/HomePage/HomePage";
 import HubLayout from "../pages/layouts/HubLayout";
+import NewEventPage from "@/pages/NewEventPage/NewEventPage";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
           {
             path: "home",
             element: <HomePage />
-          }
+          },
+          {
+            path: "novo-evento",
+            element: <NewEventPage />
+          },
         ]
       },
     ],

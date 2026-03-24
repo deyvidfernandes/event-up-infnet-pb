@@ -82,7 +82,7 @@ export default function SignupForm() {
           />
           <FormInputField 
             value={phone}
-            mask="(##) #####-####"
+            maskType="tel"
             onChange={(event) => setValue("phone", event.target.value)}
             placeholder="Insira seu telefone"
             type="text"

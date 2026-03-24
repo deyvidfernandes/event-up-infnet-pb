@@ -31,13 +31,13 @@ export default function FormInputField({
   ...rest
 }: ComponentProps) {
   
-  // Função que intercepta a digitação e aplica a máscara antes de salvar no form
+  // aplica a mascara antes do onchange
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (maskType && masks[maskType]) {
       event.target.value = masks[maskType](event.target.value);
     }
     
-    // Dispara o onChange original do react-hook-form
+    // Dispara o onChange original
     if (onChange) {
       onChange(event);
     }

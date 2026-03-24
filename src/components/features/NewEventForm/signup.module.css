@@ -1,0 +1,18 @@
+.btnLogin {
+  background-color: var(--primaryColor);
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.397);
+
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 8px;
+}
