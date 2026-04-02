@@ -17,10 +17,16 @@ export const masks = {
   },
 };
 
+interface RadioOption {
+  label: string;
+  value: string;
+}
+
 interface ComponentProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   maskType?: "cep" | "tel";
   label?: string;
+  options?: RadioOption[];
 }
 
 export default function FormInputField({
@@ -28,16 +34,16 @@ export default function FormInputField({
   maskType,
   label,
   onChange,
+  options,
+  type,
   ...rest
 }: ComponentProps) {
   
-  // aplica a mascara antes do onchange
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (maskType && masks[maskType]) {
       event.target.value = masks[maskType](event.target.value);
     }
     
-    // Dispara o onChange original
     if (onChange) {
       onChange(event);
     }
@@ -45,13 +51,31 @@ export default function FormInputField({
 
   return (
     <div className={styles.formInput}>
-      {label && <label>{label}</label>}
+      {label && <label className={styles.mainLabel}>{label}</label>}
       
-      <input 
-        {...rest} 
-        onChange={handleChange} 
-        className={errorMessage ? styles.inputError : ""}
-      />
+      {type === "radio" && options ? (
+        <div className={styles.radioGroup}>
+          {options.map((option) => (
+            <label key={option.value} className={styles.radioLabel}>
+              <input 
+                {...rest}
+                type="radio"
+                value={option.value}
+                checked={rest.value === option.value}
+                onChange={handleChange}
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+      ) : (
+        <input 
+          {...rest}
+          type={type}
+          onChange={handleChange} 
+          className={errorMessage ? styles.inputError : ""}
+        />
+      )}
       
       {errorMessage && (
         <p className={styles.errorLabel}>{errorMessage}</p>

@@ -1,57 +1,94 @@
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import * as yup from "yup";
+
+import { toast } from 'react-toastify';
+
 import Button from "../../ui/Button/Button";
 import FormInputField from "../../ui/FormInputField/FormInputField";
-import { useEffect, useState } from "react";
-import { AddressSection } from "../AddressSection/AddressSection";
-
+import { AddressSection, addressSchema, adressDefaultValues } from "../AddressSection/AddressSection";
 const cepRegExp = /^\d{5}-?\d{3}$/
 
 const schema = yup.object({
   nome: yup
     .string()
-    .required(),
+    .required('O nome do evento é obrigatório'),
   eventDate: yup
     .date()
-    .required(),
+    .required("A data do evento é obrigatória")
+    .typeError("Use apenas datas dd/mm/aaaa nesse campo"),
   cep: yup
     .string()
-    .matches(cepRegExp, 'CEP inválido. Use o formato 99999-999')
-    .required(),
+    .required("O CEP do endereço é obrigatório")
+    .matches(cepRegExp, 'CEP inválido. Use o formato 99999-999'),
   price: yup
     .number()
-    .min(0)
-    .required(),
+    .required("O preço da entrada é obrigatório")
+    .min(0, "O preço da entrada não pode ser negativo"),
   eventCapacity: yup
     .number()
-    .min(0)
-    .required(),
+    .required("A capaciade é obrigatória")
+    .min(2, "A capacidade do evento precisa ser maior que um"),
+  ...addressSchema
 });
+
+export interface EventFormData {
+  nome: string;
+  eventDate: Date;
+  price: number;
+  eventCapacity: number;
+  cep: string;
+  logradouro: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+}
+
+interface NewEventFormProps {
+  onSubmit: ((data: EventFormData) => void)
+}
 
 const eventDefaultDate = new Date();
 eventDefaultDate.setDate(eventDefaultDate.getDate() + 90);
 
-export default function NewEventForm() {
-  const methods = useForm({
+
+export default function NewEventForm({onSubmit}: NewEventFormProps) {
+  const methods = useForm<EventFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       eventCapacity: 10,
       price: 0,
       cep: "",
       nome: "",
-      eventDate: eventDefaultDate
+      eventDate: eventDefaultDate,
+      ...adressDefaultValues
     }
   });
 
-  const onSubmit = (data: any) => {
-    console.log("Dados formatados:", data);
+  const onSubmitInterno = (data: EventFormData) => {
+    try {
+      console.log("Dados formatados:", data);
+      
+      toast.success("Evento criado com sucesso!");
+      
+      methods.reset();
+      onSubmit(data)
+    } catch (error) {
+      toast.error("Algo deu errado, tente novamente mais tarde");
+    }
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '600px', marginInline: 'auto'}}>
+    <FormProvider {...methods} >
+      <form 
+        onSubmit={methods.handleSubmit(onSubmitInterno)} 
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginInline: 'auto'}}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault(); // Impede o envio acidental
+          }
+        }}
+      >
         
         <FormInputField 
           label="Nome do Evento"

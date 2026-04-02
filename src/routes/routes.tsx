@@ -1,11 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { RouterProvider } from "react-router";
-import Layout from "../pages/layouts/Layout";
 import AccountPage from "../pages/AccountPage/AccountPage";
 import { ProtectedRoute, PublicRoute } from "./AuthGuard";
-import HomePage from "../pages/HomePage/HomePage";
-import HubLayout from "../pages/layouts/HubLayout";
+import LoggedLayout from "../layouts/LoggedLayout/LoggedLayout";
 import NewEventPage from "@/pages/NewEventPage/NewEventPage";
+import UserHomePage from "../pages/UserHomePage/UserHomePage";
+import EventDetailsPage from "@/pages/EventDetailsPage/EventDetailsPage";
+import SubscribedEventsPage from "@/pages/SubscribedEventsPage/SubscribedEventsPage";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "u",
-        element: <ProtectedRoute><HubLayout /></ProtectedRoute>,
+        element: <ProtectedRoute><LoggedLayout /></ProtectedRoute>,
         children: [
           {
             index: true,
@@ -34,12 +35,20 @@ const router = createBrowserRouter([
           },
           {
             path: "home",
-            element: <HomePage />
+            element: <UserHomePage/>
           },
           {
             path: "novo-evento",
             element: <NewEventPage />
           },
+          {
+            path: "detalhe-evento/:id",
+            element: <EventDetailsPage />
+          },
+          {
+            path: "inscricoes",
+            element: <SubscribedEventsPage />
+          }
         ]
       },
     ],

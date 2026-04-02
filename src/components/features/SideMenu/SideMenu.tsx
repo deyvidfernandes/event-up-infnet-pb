@@ -3,7 +3,7 @@ import useClickOutside from "@/hooks/useClickOutside";
 import styles from "./SideMenu.module.css";
 import { MenuGroup } from './types';
 import { getLoggedUser } from '@/lib/util/mockLocalStorage';
-import {Link} from 'react-router';
+import {Link, useNavigate} from 'react-router';
 
 type SideMenuProps = {
     menuGroups: MenuGroup[]
@@ -15,7 +15,7 @@ export function SideMenu({menuGroups}: SideMenuProps) {
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const sidebarRef = useRef<HTMLElement>(null);
     const accessType = getLoggedUser()!.accountType
-
+    const navigate = useNavigate()
     // UX
 
     useEffect(() => {
@@ -43,18 +43,22 @@ export function SideMenu({menuGroups}: SideMenuProps) {
 
     // ACESSOS
 
-    const filteredMenuGroups = menuGroups.filter(mg => mg.allowed === accessType)
+    const filteredMenuGroups = menuGroups.filter(mg => ((mg.allowed === accessType) || (mg.allowed === "all")))
 
     // RENDERIZAÇÃO
 
     return (
         <>
-            {/* Botão Hambúrguer no Mobile */}
-            <button className={styles.mobileMenuBtn} onClick={toggleMenu}>
-                <i className="fa-solid fa-bars"></i>
-            </button>
+            {/* Botão burguer no Mobile */}
+            { !isDesktop && (
+                    <button className={styles.mobileMenuBtn} onClick={toggleMenu}>
+                        <i className="fa-solid fa-bars"></i>
+                    </button>
+                )
+            }
+            
 
-            <aside 
+            <nav 
                 className={`${styles.sidebar} ${isExpanded ? styles.expanded : ''}`}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
@@ -80,18 +84,37 @@ export function SideMenu({menuGroups}: SideMenuProps) {
                             </h4>
                             {group.links.map((link, linkIndex) => (
                                 <li key={linkIndex}>
-                                    <Link to={link.path}>
-                                        <div className={styles.iconContainer}>
-                                            <i className={`fa-solid ${link.icon}`}></i>
-                                        </div>
-                                        <span className={styles.linkText}>{link.label}</span>
+                                    
+                                    <Link 
+                                    key={link.label} 
+                                    onClick={(e) => {
+                                        if (link.disabled) {
+                                        e.preventDefault();
+                                        return;
+                                        }
+
+                                        const isFunction = typeof link.path === "function";
+                                        if (isFunction) {
+                                        e.preventDefault();
+                                        (link.path as Function)(navigate);
+                                        } else {
+                                        setIsExpanded(false);
+                                        }
+                                    }} 
+                                    to={link.disabled ? "#" : (typeof link.path === "function" ? "#" : link.path)}
+                                    className={`${styles.link} ${link.disabled ? styles.disabled : ""}`}
+                                    >
+                                    <div className={styles.iconContainer}>
+                                        <i className={`fa-solid ${link.icon}`}></i>
+                                    </div>
+                                    <span className={styles.linkText}>{link.label}</span>
                                     </Link>
                                 </li>
                             ))}
                         </div>
                     ))}
                 </ul>
-            </aside>
+            </nav>
         </>
     );
 }

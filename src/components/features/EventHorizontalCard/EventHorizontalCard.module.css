@@ -1,0 +1,154 @@
+/* --- ESTILO BASE (MOBILE FIRST) --- */
+.card {
+  display: flex;
+  flex-direction: column; /* Empilhado no mobile */
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  margin: 0 0 16px 0;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  width: 100%;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mainInfo {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: column; /* Título sobre a data no mobile */
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mainTitleInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.2;
+}
+
+.dateBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #555;
+  background: #f0f2f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.locationInfo {
+  font-size: 16px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.description {
+  margin: 12px 0 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ... para textos com + de 2 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 16px;
+}
+
+.capacity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #888;
+  font-size: 14px;
+}
+
+.priceTag {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+}
+
+.freeBadge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    max-width: 800px;
+    margin: 0 auto 24px auto;
+  }
+
+  .imageContainer {
+    width: 300px;
+    height: auto;
+  }
+
+  .mainInfo {
+    padding: 24px 32px;
+  }
+
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .priceTag {
+    font-size: 22px;
+  }
+}

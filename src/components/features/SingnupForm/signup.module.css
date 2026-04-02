@@ -10,9 +10,16 @@
   font-weight: 600;
 }
 
-.formContainer {
+.formInputsContainer {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   gap: 8px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 24px;
 }

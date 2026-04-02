@@ -1,0 +1,178 @@
+/* --- MOBILE FIRST --- */
+.container {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.detailsCard {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.imageWrapper {
+  position: relative;
+  height: 250px;
+}
+
+.eventImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.backButton {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.content {
+  padding: 24px;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.dateBadge, .priceBadge, .freeBadge {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.dateBadge { background: #f0f2f5; color: #555; }
+.priceBadge { background: #111; color: #fff; }
+.freeBadge { background: #e8f5e9; color: #2e7d32; }
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 24px 0;
+  line-height: 1.1;
+}
+
+.infoSection h3, .locationSection h3 {
+  font-size: 18px;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.address {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 16px;
+  color: #666;
+}
+
+.address p { margin: 4px 0; }
+
+.footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.capacityCount {
+  color: #888;
+  font-weight: 600;
+}
+
+.subscribeBtn {
+  background: #007aff;
+  color: #fff;
+  border: none;
+  padding: 18px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.subscribeBtn:hover { background: #0063d1; }
+
+.subscribedBtn {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 2px solid #2e7d32;
+  padding: 18px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: default;
+}
+
+/* --- DESKTOP --- */
+@media (min-width: 768px) {
+  .container { padding: 40px 20px; }
+  
+  .detailsCard {
+    display: flex;
+    min-height: 600px;
+  }
+
+  .imageWrapper {
+    flex: 1.2;
+    height: auto;
+  }
+
+  .content {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title { font-size: 40px; }
+
+  .footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  .subscribeBtn, .subscribedBtn {
+    min-width: 250px;
+  }
+
+  .deleteBtn {
+    width: 100%;
+    background-color: #fff;
+    color: #dc3545;
+    border: 1.5px solid #dc3545;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .deleteBtn:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+}

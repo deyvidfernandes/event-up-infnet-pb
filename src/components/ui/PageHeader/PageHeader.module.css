@@ -1,0 +1,16 @@
+:root {
+  --primary-color: var(--primaryColor);
+  --bg-color: hsl(0, 0%, 92%);
+}
+
+.pageHeaderTitle {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.pageHeaderContainer {
+    background-color: var(--bg-color);
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.103);
+    width: 100%;
+    padding-block: 12px;
+}

@@ -1,38 +1,69 @@
-import FormInputField from '@/components/ui/FormInputField/FormInputField';
 import { useEffect, useState } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import FormInputField from '@/components/ui/FormInputField/FormInputField';
+
+import styles from './AdressSection.module.css';
+
+
+import * as yup from "yup";
+
+export const addressSchema = {
+  logradouro: 
+    yup.string().
+    required("Logradouro obrigatório"),
+  bairro: 
+    yup.string().
+    required("Bairro obrigatório"),
+  cidade: 
+    yup.string()
+    .required("Cidade obrigatória"),
+  uf: 
+    yup.string().
+    required("UF obrigatória").
+    max(2),
+};
+
+export const adressDefaultValues = {
+  logradouro: "",
+  bairro: "",
+  cidade: "",
+  uf: ""
+}
+
 
 export function AddressSection() {
-  const { control, setValue, formState: { errors }, watch } = useFormContext();
+  const { control, setValue, formState: { errors } } = useFormContext();
   const [cepToFetch, setCepToFetch] = useState("");
-
-  const currentCep = watch("cep");
 
   useEffect(() => {
     const fetchAddress = async () => {
-      const cleanCep = cepToFetch.replace(/\D/g, "");
-      if (cleanCep.length !== 8) return;
+      const cleanCep = cepToFetch?.replace(/\D/g, "");
+      if (!cleanCep || cleanCep.length !== 8) return;
 
       try {
         const response = await fetch(`https://viacep.com.br/ws/${cleanCep}/json/`);
         const data = await response.json();
+
         if (!data.erro) {
-          // Preenche os campos automaticamente
-          setValue("logradouro", data.logradouro);
-          setValue("bairro", data.bairro);
-          setValue("cidade", data.localidade);
-          setValue("uf", data.uf);
+          setValue("logradouro", data.logradouro, { shouldValidate: true });
+          setValue("bairro", data.bairro, { shouldValidate: true });
+          setValue("cidade", data.localidade, { shouldValidate: true });
+          setValue("uf", data.uf, { shouldValidate: true });
+        } else {
+          toast.error("CEP não encontrado.");
         }
       } catch (err) {
-        console.error("Erro ao buscar CEP", err);
+        toast.error("Erro ao buscar o CEP.");
       }
     };
 
-    if (cepToFetch) fetchAddress();
+    fetchAddress();
   }, [cepToFetch, setValue]);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+    <div className={styles.container}>
+      {/*controler para poder manipular o valor de CEP no método register */}
       <Controller
         name="cep"
         control={control}
@@ -42,20 +73,22 @@ export function AddressSection() {
             maskType="cep"
             value={value}
             errorMessage={errors.cep?.message as string}
-            onBlur={() => {
+            onBlur={(e) => {
               onBlur();
-              setCepToFetch(value);
+              setCepToFetch(e.target.value);
             }}
             {...rest}
           />
         )}
       />
 
-      <FormInputField 
-        label="Logradouro" 
-        {...control.register("logradouro")} 
-        errorMessage={errors.logradouro?.message as string}
-      />
+      <div className={styles.fullWidth}>
+        <FormInputField 
+          label="Logradouro" 
+          {...control.register("logradouro")} 
+          errorMessage={errors.logradouro?.message as string}
+        />
+      </div>
       
       <FormInputField 
         label="Bairro" 
@@ -63,9 +96,17 @@ export function AddressSection() {
         errorMessage={errors.bairro?.message as string}
       />
 
-      <div style={{ display: 'flex', gap: '10px' }}>
-        <FormInputField label="Cidade" {...control.register("cidade")} />
-        <FormInputField label="UF" {...control.register("uf")} />
+      <div className={styles.inlineGroup}>
+        <FormInputField 
+          label="Cidade" 
+          {...control.register("cidade")} 
+          errorMessage={errors.cidade?.message as string}
+        />
+        <FormInputField 
+          label="UF" 
+          {...control.register("uf")} 
+          errorMessage={errors.uf?.message as string}
+        />
       </div>
     </div>
   );

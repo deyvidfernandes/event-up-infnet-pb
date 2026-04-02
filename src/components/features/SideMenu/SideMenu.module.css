@@ -6,7 +6,7 @@
   --bg-color: hsl(0, 0%, 92%);
 }
 
-/* --- CONFIGURAÇÃO MOBILE (PADRÃO) --- */
+/* --- MOBILE --- */
 .sidebar {
   position: fixed;
   top: 0;
@@ -28,7 +28,47 @@
   opacity: 1;
 }
 
-/* --- CONFIGURAÇÃO DESKTOP (TABLETS PARA CIMA) --- */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.mobileMenuBtn, .closeMenuBtn {
+  /* Posicionamento Flutuante */
+  position: fixed;
+  top: 15px;
+  right: 15px;
+
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: var(--primaryColor);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+}
+
+.mobileMenuBtn i, closeMenuBtn i {
+  font-size: 20px;
+}
+
+.closeMenuBtn {
+  display: none;
+}
+
+.expanded .closeMenuBtn{
+  display: flex;
+  z-index: 1001;
+}
+
+
+/* DESKTOP */
 @media (min-width: 768px) {
   .sidebar {
     left: 0;
