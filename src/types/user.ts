@@ -1,7 +1,7 @@
-export type AccountTypes = "participante" | "organizador"
+export type AccountTypes = "participante" | "organizador";
 
 export interface UserData {
-  nome: string,
-  email: string,
-  accountType: AccountTypes
+  nome: string;
+  email: string;
+  accountType: AccountTypes;
 }

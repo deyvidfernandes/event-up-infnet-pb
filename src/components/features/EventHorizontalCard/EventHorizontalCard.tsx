@@ -1,19 +1,22 @@
-import React from 'react';
-import { EventData } from '@/types/event';
-import styles from './EventHorizontalCard.module.css';
+import React from "react";
+import { EventData } from "@/types/event";
+import styles from "./EventHorizontalCard.module.css";
 
 interface EventHorizontalCardProps {
   event: EventData;
   onClick?: (id: string | number) => void;
 }
 
-export const EventHorizontalCard: React.FC<EventHorizontalCardProps> = ({ event, onClick }) => {
+export const EventHorizontalCard: React.FC<EventHorizontalCardProps> = ({
+  event,
+  onClick,
+}) => {
   const { id, nome, eventDate, price, eventCapacity, cidade, uf } = event;
 
-  const formattedDate = new Date(eventDate).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric'
+  const formattedDate = new Date(eventDate).toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
   });
 
   const isFree = price === 0;
@@ -28,12 +31,14 @@ export const EventHorizontalCard: React.FC<EventHorizontalCardProps> = ({ event,
       <div className={styles.mainInfo}>
         <div className={styles.contentTop}>
           <div className={styles.header}>
-          <div className={styles.mainTitleInfo}>
-            <h3 className={styles.title}>{nome}</h3>
-            <div className={styles.locationInfo}>
-              <span>{cidade}, {uf}</span>
+            <div className={styles.mainTitleInfo}>
+              <h3 className={styles.title}>{nome}</h3>
+              <div className={styles.locationInfo}>
+                <span>
+                  {cidade}, {uf}
+                </span>
+              </div>
             </div>
-          </div>
             <div className={styles.dateBadge}>
               <span>📅</span>
               <span>{formattedDate}</span>
@@ -41,7 +46,9 @@ export const EventHorizontalCard: React.FC<EventHorizontalCardProps> = ({ event,
           </div>
         </div>
         <p className={styles.description}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium mollitia ex facere minima nihil numquam, placeat quae animi corrupti voluptate ad velit error provident sequi.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
+          mollitia ex facere minima nihil numquam, placeat quae animi corrupti
+          voluptate ad velit error provident sequi.
         </p>
         <div className={styles.footerRow}>
           <div className={styles.capacity}>
@@ -53,7 +60,10 @@ export const EventHorizontalCard: React.FC<EventHorizontalCardProps> = ({ event,
               <span className={styles.freeBadge}>GRATUITO</span>
             ) : (
               <span className={styles.priceTag}>
-                {price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                {price.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
               </span>
             )}
           </div>

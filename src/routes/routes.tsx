@@ -12,44 +12,56 @@ const router = createBrowserRouter([
   {
     path: "/",
     children: [
-        {
+      {
         index: true,
-        element: <Navigate to="/u" replace />
+        element: <Navigate to="/u" replace />,
       },
       {
         path: "login",
         index: true,
-        element: <PublicRoute><AccountPage view="login"/></PublicRoute>
+        element: (
+          <PublicRoute>
+            <AccountPage view="login" />
+          </PublicRoute>
+        ),
       },
       {
         path: "signup",
-        element: <PublicRoute><AccountPage view='signup'/></PublicRoute>
+        element: (
+          <PublicRoute>
+            <AccountPage view="signup" />
+          </PublicRoute>
+        ),
       },
       {
         path: "u",
-        element: <ProtectedRoute><LoggedLayout /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <LoggedLayout />
+          </ProtectedRoute>
+        ),
         children: [
           {
             index: true,
-            element: <Navigate to="home" replace />
+            element: <Navigate to="home" replace />,
           },
           {
             path: "home",
-            element: <UserHomePage/>
+            element: <UserHomePage />,
           },
           {
             path: "novo-evento",
-            element: <NewEventPage />
+            element: <NewEventPage />,
           },
           {
             path: "detalhe-evento/:id",
-            element: <EventDetailsPage />
+            element: <EventDetailsPage />,
           },
           {
             path: "inscricoes",
-            element: <SubscribedEventsPage />
-          }
-        ]
+            element: <SubscribedEventsPage />,
+          },
+        ],
       },
     ],
   },

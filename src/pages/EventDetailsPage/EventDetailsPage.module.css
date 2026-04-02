@@ -46,16 +46,27 @@
   flex-wrap: wrap;
 }
 
-.dateBadge, .priceBadge, .freeBadge {
+.dateBadge,
+.priceBadge,
+.freeBadge {
   font-size: 14px;
   font-weight: 700;
   padding: 6px 14px;
   border-radius: 20px;
 }
 
-.dateBadge { background: #f0f2f5; color: #555; }
-.priceBadge { background: #111; color: #fff; }
-.freeBadge { background: #e8f5e9; color: #2e7d32; }
+.dateBadge {
+  background: #f0f2f5;
+  color: #555;
+}
+.priceBadge {
+  background: #111;
+  color: #fff;
+}
+.freeBadge {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
 
 .title {
   font-size: 28px;
@@ -65,7 +76,8 @@
   line-height: 1.1;
 }
 
-.infoSection h3, .locationSection h3 {
+.infoSection h3,
+.locationSection h3 {
   font-size: 18px;
   color: #111;
   margin-bottom: 12px;
@@ -84,7 +96,9 @@
   color: #666;
 }
 
-.address p { margin: 4px 0; }
+.address p {
+  margin: 4px 0;
+}
 
 .footer {
   margin-top: 40px;
@@ -112,7 +126,9 @@
   transition: background 0.2s;
 }
 
-.subscribeBtn:hover { background: #0063d1; }
+.subscribeBtn:hover {
+  background: #0063d1;
+}
 
 .subscribedBtn {
   background: #e8f5e9;
@@ -127,8 +143,10 @@
 
 /* --- DESKTOP --- */
 @media (min-width: 768px) {
-  .container { padding: 40px 20px; }
-  
+  .container {
+    padding: 40px 20px;
+  }
+
   .detailsCard {
     display: flex;
     min-height: 600px;
@@ -146,7 +164,9 @@
     flex-direction: column;
   }
 
-  .title { font-size: 40px; }
+  .title {
+    font-size: 40px;
+  }
 
   .footer {
     flex-direction: row;
@@ -155,7 +175,8 @@
     margin-top: auto;
   }
 
-  .subscribeBtn, .subscribedBtn {
+  .subscribeBtn,
+  .subscribedBtn {
     min-width: 250px;
   }
 

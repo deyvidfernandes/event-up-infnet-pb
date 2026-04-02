@@ -1,7 +1,7 @@
 import { EventData } from "@/types/event";
 import { UserData } from "@/types/user";
 
-const USER_STORAGE_KEY = 'eventup_user_logged';
+const USER_STORAGE_KEY = "eventup_user_logged";
 
 export const login = (userData: UserData) => {
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
@@ -21,9 +21,7 @@ export const getLoggedUser = (): UserData | null => {
   return user ? JSON.parse(user) : null;
 };
 
-
-
-const EVENTS_STORAGE_KEY = 'eventup_events_data';
+const EVENTS_STORAGE_KEY = "eventup_events_data";
 
 // Estrutura do Dict: { "joaosilva": [ {id: 1, nome: "Evento A"}, ... ], "mariad": [...] }
 type EventsDict = Record<string, EventData[]>;
@@ -46,7 +44,7 @@ export const addEvent = (username: string, event: EventData) => {
 };
 
 /**
- * Lê eventos: 
+ * Lê eventos:
  */
 export const getEvents = (username?: string): EventData[] => {
   const storage = localStorage.getItem(EVENTS_STORAGE_KEY);
@@ -69,8 +67,8 @@ export const getSubscribedEvents = (userEmail: string): EventData[] => {
 
   const allEvents = Object.values(eventsDict).flat();
 
-  return allEvents.filter((event) => 
-    event.emailInscritos && event.emailInscritos.includes(userEmail)
+  return allEvents.filter(
+    (event) => event.emailInscritos && event.emailInscritos.includes(userEmail),
   );
 };
 
@@ -84,9 +82,11 @@ export const deleteEvent = (eventId: string | number) => {
   const eventsDict: EventsDict = JSON.parse(storage);
 
   const updatedDict: EventsDict = {};
-  
+
   Object.keys(eventsDict).forEach((user) => {
-    updatedDict[user] = eventsDict[user].filter(event => event.id !== eventId);
+    updatedDict[user] = eventsDict[user].filter(
+      (event) => event.id !== eventId,
+    );
   });
 
   localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(updatedDict));
@@ -95,7 +95,10 @@ export const deleteEvent = (eventId: string | number) => {
 /**
  * Inscreve e-mail em um evento
  */
-export const subscribeToEvent = (eventId: string | number, userEmail: string) => {
+export const subscribeToEvent = (
+  eventId: string | number,
+  userEmail: string,
+) => {
   const storage = localStorage.getItem(EVENTS_STORAGE_KEY);
   if (!storage) return;
 
@@ -108,16 +111,16 @@ export const subscribeToEvent = (eventId: string | number, userEmail: string) =>
     updatedDict[creator] = eventsDict[creator].map((event) => {
       if (event.id === eventId) {
         eventFound = true;
-        
+
         const currentInscribed = event.emailInscritos || [];
-        
+
         if (currentInscribed.includes(userEmail)) {
           return event;
         }
 
         return {
           ...event,
-          emailInscritos: [...currentInscribed, userEmail]
+          emailInscritos: [...currentInscribed, userEmail],
         };
       }
       return event;
@@ -127,6 +130,6 @@ export const subscribeToEvent = (eventId: string | number, userEmail: string) =>
   if (eventFound) {
     localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(updatedDict));
   }
-  
+
   return eventFound;
 };

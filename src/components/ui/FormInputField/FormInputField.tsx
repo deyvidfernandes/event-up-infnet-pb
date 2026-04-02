@@ -38,12 +38,11 @@ export default function FormInputField({
   type,
   ...rest
 }: ComponentProps) {
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (maskType && masks[maskType]) {
       event.target.value = masks[maskType](event.target.value);
     }
-    
+
     if (onChange) {
       onChange(event);
     }
@@ -52,12 +51,12 @@ export default function FormInputField({
   return (
     <div className={styles.formInput}>
       {label && <label className={styles.mainLabel}>{label}</label>}
-      
+
       {type === "radio" && options ? (
         <div className={styles.radioGroup}>
           {options.map((option) => (
             <label key={option.value} className={styles.radioLabel}>
-              <input 
+              <input
                 {...rest}
                 type="radio"
                 value={option.value}
@@ -69,17 +68,15 @@ export default function FormInputField({
           ))}
         </div>
       ) : (
-        <input 
+        <input
           {...rest}
           type={type}
-          onChange={handleChange} 
+          onChange={handleChange}
           className={errorMessage ? styles.inputError : ""}
         />
       )}
-      
-      {errorMessage && (
-        <p className={styles.errorLabel}>{errorMessage}</p>
-      )}
+
+      {errorMessage && <p className={styles.errorLabel}>{errorMessage}</p>}
     </div>
   );
 }

@@ -1,17 +1,18 @@
 :root {
-    background-color: #eeeeee;
-    box-sizing: border-box;
-    text-align: center;
-    
-    --primaryColor: rgb(8, 109, 84);
-    --primaryColor-100: hsl(165, 86%, 15%);
+  background-color: #eeeeee;
+  box-sizing: border-box;
+  text-align: center;
+
+  --primaryColor: rgb(8, 109, 84);
+  --primaryColor-100: hsl(165, 86%, 15%);
 }
 
-body, html {
-    overflow-x: hidden;
-  }
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+body,
+html {
+  overflow-x: hidden;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

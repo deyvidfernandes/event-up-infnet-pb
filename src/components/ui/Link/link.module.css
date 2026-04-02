@@ -1,9 +1,9 @@
 .link {
-    color: var(--primaryColor);
-    font-weight: 500;
-    cursor: pointer;
+  color: var(--primaryColor);
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .link:visited {
-    color: var(--primaryColor)
+  color: var(--primaryColor);
 }

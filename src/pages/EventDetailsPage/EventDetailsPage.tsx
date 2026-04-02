@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { 
-    deleteEvent,
-  getEvents, 
-  getLoggedUser, 
-  subscribeToEvent 
+import {
+  deleteEvent,
+  getEvents,
+  getLoggedUser,
+  subscribeToEvent,
 } from "@/lib/util/mockLocalStorage";
 import { EventData } from "@/types/event";
 
@@ -15,9 +15,12 @@ import { toast } from "react-toastify";
 export default function EventDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
+
   const [event, setEvent] = useState<EventData | null>(null);
-  const [user, setUser] = useState<{ email: string; accountType: string } | null>(null);
+  const [user, setUser] = useState<{
+    email: string;
+    accountType: string;
+  } | null>(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   useEffect(() => {
@@ -43,7 +46,7 @@ export default function EventDetailsPage() {
     }
   };
 
-    const handleDelete = () => {
+  const handleDelete = () => {
     if (id) {
       deleteEvent(id);
       navigate(-1);
@@ -69,7 +72,11 @@ export default function EventDetailsPage() {
       <div className={styles.container}>
         <article className={styles.detailsCard}>
           <div className={styles.imageWrapper}>
-            <img src={imageUrl} alt={event.nome} className={styles.eventImage} />
+            <img
+              src={imageUrl}
+              alt={event.nome}
+              className={styles.eventImage}
+            />
             <button className={styles.backButton} onClick={() => navigate(-1)}>
               ← Voltar
             </button>
@@ -79,10 +86,17 @@ export default function EventDetailsPage() {
             <header className={styles.header}>
               <div className={styles.badgeRow}>
                 <span className={styles.dateBadge}>📅 {formattedDate}</span>
-                <span className={event.price === 0 ? styles.freeBadge : styles.priceBadge}>
-                  {event.price === 0 
-                    ? "GRATUITO" 
-                    : event.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                <span
+                  className={
+                    event.price === 0 ? styles.freeBadge : styles.priceBadge
+                  }
+                >
+                  {event.price === 0
+                    ? "GRATUITO"
+                    : event.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
                 </span>
               </div>
               <h1 className={styles.title}>{event.nome}</h1>
@@ -91,8 +105,9 @@ export default function EventDetailsPage() {
             <section className={styles.infoSection}>
               <h3>Sobre o evento</h3>
               <p className={styles.description}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium mollitia ex facere minima nihil 
-                numquam, placeat quae animi corrupti voluptate ad velit error provident sequi. 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Praesentium mollitia ex facere minima nihil numquam, placeat
+                quae animi corrupti voluptate ad velit error provident sequi.
                 Veniam magni laudantium repellendus alias?
               </p>
             </section>
@@ -100,8 +115,12 @@ export default function EventDetailsPage() {
             <section className={styles.locationSection}>
               <h3>Localização</h3>
               <div className={styles.address}>
-                <p><strong>{event.logradouro}</strong></p>
-                <p>{event.bairro} - {event.cidade}, {event.uf}</p>
+                <p>
+                  <strong>{event.logradouro}</strong>
+                </p>
+                <p>
+                  {event.bairro} - {event.cidade}, {event.uf}
+                </p>
                 <p className={styles.zipCode}>CEP: {event.cep}</p>
               </div>
             </section>
@@ -112,19 +131,20 @@ export default function EventDetailsPage() {
                   👥 {event.eventCapacity} vagas totais
                 </span>
               </div>
-              
+
               {user?.accountType === "organizador" ? (
-                <button 
+                <button
                   className={styles.deleteBtn}
                   onClick={handleDelete}
                   disabled={isSubscribed}
                 >
                   Excluir Evento
                 </button>
-                )
-              : (
-                <button 
-                  className={isSubscribed ? styles.subscribedBtn : styles.subscribeBtn}
+              ) : (
+                <button
+                  className={
+                    isSubscribed ? styles.subscribedBtn : styles.subscribeBtn
+                  }
                   onClick={handleSubscribe}
                   disabled={isSubscribed}
                 >

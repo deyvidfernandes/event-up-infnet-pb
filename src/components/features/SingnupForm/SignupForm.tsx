@@ -25,18 +25,16 @@ const schema = yup.object({
     .string()
     .min(8, "A senha precisa ter pelo menos 8 caracteres")
     .required("A confirmação é obrigatória")
-    .oneOf([yup.ref('password')], 'As senhas não conferem'),
+    .oneOf([yup.ref("password")], "As senhas não conferem"),
   nameInput: yup
     .string()
-    .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, 'Use apenas letras no nome')
+    .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, "Use apenas letras no nome")
     .required("O nome é obrigatório"),
   phone: yup
     .string()
-    .matches(phoneRegExp, 'Telefone inválido. Use o formato (11) 99999-9999')
-    .required('O telefone é obrigatório'),
-  accountType: yup
-    .string()
-    .required('Selecione o tipo de conta'),
+    .matches(phoneRegExp, "Telefone inválido. Use o formato (11) 99999-9999")
+    .required("O telefone é obrigatório"),
+  accountType: yup.string().required("Selecione o tipo de conta"),
 });
 
 export default function SignupForm() {
@@ -53,29 +51,33 @@ export default function SignupForm() {
       nameInput: "",
       phone: "",
       verifyPassword: "",
-      accountType: "participante" 
+      accountType: "participante",
     },
     resolver: yupResolver(schema),
   });
 
-  type SignupFormDataType = yup.InferType<typeof schema>
+  type SignupFormDataType = yup.InferType<typeof schema>;
 
-  const { user, password, nameInput, phone, verifyPassword, accountType } = watch();
+  const { user, password, nameInput, phone, verifyPassword, accountType } =
+    watch();
 
   const handleLogin = (data: SignupFormDataType) => {
     login({
       email: data.user,
       nome: data.nameInput,
-      accountType: data.accountType as AccountTypes
-    })
-    navigate("/u")
-  }
+      accountType: data.accountType as AccountTypes,
+    });
+    navigate("/u");
+  };
 
   return (
     <main style={{ padding: "32px" }}>
-      <form className={styles.formContainer} onSubmit={handleSubmit(handleLogin)}>
+      <form
+        className={styles.formContainer}
+        onSubmit={handleSubmit(handleLogin)}
+      >
         <div className={styles.formInputsContainer}>
-          <FormInputField 
+          <FormInputField
             label="Tipo de conta"
             type="radio"
             value={accountType}
@@ -83,11 +85,11 @@ export default function SignupForm() {
             errorMessage={errors.accountType?.message}
             options={[
               { label: "Participante", value: "participante" },
-              { label: "Organizador", value: "organizador" }
+              { label: "Organizador", value: "organizador" },
             ]}
           />
 
-          <FormInputField 
+          <FormInputField
             label="Nome Completo"
             value={nameInput}
             onChange={(event) => setValue("nameInput", event.target.value)}
@@ -96,7 +98,7 @@ export default function SignupForm() {
             errorMessage={errors.nameInput?.message}
           />
 
-          <FormInputField 
+          <FormInputField
             label="E-mail"
             value={user}
             onChange={(event) => setValue("user", event.target.value)}
@@ -105,7 +107,7 @@ export default function SignupForm() {
             errorMessage={errors.user?.message}
           />
 
-          <FormInputField 
+          <FormInputField
             label="Telefone"
             value={phone}
             maskType="tel"
@@ -114,8 +116,8 @@ export default function SignupForm() {
             type="text"
             errorMessage={errors.phone?.message}
           />
-        
-          <FormInputField 
+
+          <FormInputField
             label="Senha"
             value={password}
             onChange={(event) => setValue("password", event.target.value)}
@@ -124,7 +126,7 @@ export default function SignupForm() {
             errorMessage={errors.password?.message}
           />
 
-          <FormInputField 
+          <FormInputField
             label="Confirmação de Senha"
             value={verifyPassword}
             onChange={(event) => setValue("verifyPassword", event.target.value)}
@@ -132,11 +134,8 @@ export default function SignupForm() {
             type="password"
             errorMessage={errors.verifyPassword?.message}
           />
-
         </div>
-        <Button type="submit">
-          Entrar
-        </Button>
+        <Button type="submit">Entrar</Button>
         <Link href="/login">Já tenho uma conta</Link>
       </form>
     </main>

@@ -1,39 +1,32 @@
-import { useEffect, useState } from 'react';
-import { useFormContext, Controller } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import FormInputField from '@/components/ui/FormInputField/FormInputField';
+import { useEffect, useState } from "react";
+import { useFormContext, Controller } from "react-hook-form";
+import { toast } from "react-toastify";
+import FormInputField from "@/components/ui/FormInputField/FormInputField";
 
-import styles from './AdressSection.module.css';
-
+import styles from "./AdressSection.module.css";
 
 import * as yup from "yup";
 
 export const addressSchema = {
-  logradouro: 
-    yup.string().
-    required("Logradouro obrigatório"),
-  bairro: 
-    yup.string().
-    required("Bairro obrigatório"),
-  cidade: 
-    yup.string()
-    .required("Cidade obrigatória"),
-  uf: 
-    yup.string().
-    required("UF obrigatória").
-    max(2),
+  logradouro: yup.string().required("Logradouro obrigatório"),
+  bairro: yup.string().required("Bairro obrigatório"),
+  cidade: yup.string().required("Cidade obrigatória"),
+  uf: yup.string().required("UF obrigatória").max(2),
 };
 
 export const adressDefaultValues = {
   logradouro: "",
   bairro: "",
   cidade: "",
-  uf: ""
-}
-
+  uf: "",
+};
 
 export function AddressSection() {
-  const { control, setValue, formState: { errors } } = useFormContext();
+  const {
+    control,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
   const [cepToFetch, setCepToFetch] = useState("");
 
   useEffect(() => {
@@ -42,7 +35,9 @@ export function AddressSection() {
       if (!cleanCep || cleanCep.length !== 8) return;
 
       try {
-        const response = await fetch(`https://viacep.com.br/ws/${cleanCep}/json/`);
+        const response = await fetch(
+          `https://viacep.com.br/ws/${cleanCep}/json/`,
+        );
         const data = await response.json();
 
         if (!data.erro) {
@@ -83,28 +78,28 @@ export function AddressSection() {
       />
 
       <div className={styles.fullWidth}>
-        <FormInputField 
-          label="Logradouro" 
-          {...control.register("logradouro")} 
+        <FormInputField
+          label="Logradouro"
+          {...control.register("logradouro")}
           errorMessage={errors.logradouro?.message as string}
         />
       </div>
-      
-      <FormInputField 
-        label="Bairro" 
-        {...control.register("bairro")} 
+
+      <FormInputField
+        label="Bairro"
+        {...control.register("bairro")}
         errorMessage={errors.bairro?.message as string}
       />
 
       <div className={styles.inlineGroup}>
-        <FormInputField 
-          label="Cidade" 
-          {...control.register("cidade")} 
+        <FormInputField
+          label="Cidade"
+          {...control.register("cidade")}
           errorMessage={errors.cidade?.message as string}
         />
-        <FormInputField 
-          label="UF" 
-          {...control.register("uf")} 
+        <FormInputField
+          label="UF"
+          {...control.register("uf")}
           errorMessage={errors.uf?.message as string}
         />
       </div>

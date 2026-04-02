@@ -14,7 +14,7 @@
 
 .imageSection {
   flex: 1;
-  background: url('/cover.png') center / cover no-repeat;
+  background: url("/cover.png") center / cover no-repeat;
   display: none;
 }
 
@@ -37,12 +37,12 @@
 }
 
 .loginPage {
-  background: url('/cover.png') center/cover no-repeat;
+  background: url("/cover.png") center/cover no-repeat;
 }
 
 @media (min-width: 768px) {
   .loginPage {
-    background: none
+    background: none;
   }
   .imageSection {
     display: block;

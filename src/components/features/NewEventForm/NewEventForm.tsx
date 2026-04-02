@@ -2,17 +2,19 @@ import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import Button from "../../ui/Button/Button";
 import FormInputField from "../../ui/FormInputField/FormInputField";
-import { AddressSection, addressSchema, adressDefaultValues } from "../AddressSection/AddressSection";
-const cepRegExp = /^\d{5}-?\d{3}$/
+import {
+  AddressSection,
+  addressSchema,
+  adressDefaultValues,
+} from "../AddressSection/AddressSection";
+const cepRegExp = /^\d{5}-?\d{3}$/;
 
 const schema = yup.object({
-  nome: yup
-    .string()
-    .required('O nome do evento é obrigatório'),
+  nome: yup.string().required("O nome do evento é obrigatório"),
   eventDate: yup
     .date()
     .required("A data do evento é obrigatória")
@@ -20,7 +22,7 @@ const schema = yup.object({
   cep: yup
     .string()
     .required("O CEP do endereço é obrigatório")
-    .matches(cepRegExp, 'CEP inválido. Use o formato 99999-999'),
+    .matches(cepRegExp, "CEP inválido. Use o formato 99999-999"),
   price: yup
     .number()
     .required("O preço da entrada é obrigatório")
@@ -29,7 +31,7 @@ const schema = yup.object({
     .number()
     .required("A capaciade é obrigatória")
     .min(2, "A capacidade do evento precisa ser maior que um"),
-  ...addressSchema
+  ...addressSchema,
 });
 
 export interface EventFormData {
@@ -45,14 +47,13 @@ export interface EventFormData {
 }
 
 interface NewEventFormProps {
-  onSubmit: ((data: EventFormData) => void)
+  onSubmit: (data: EventFormData) => void;
 }
 
 const eventDefaultDate = new Date();
 eventDefaultDate.setDate(eventDefaultDate.getDate() + 90);
 
-
-export default function NewEventForm({onSubmit}: NewEventFormProps) {
+export default function NewEventForm({ onSubmit }: NewEventFormProps) {
   const methods = useForm<EventFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -61,43 +62,47 @@ export default function NewEventForm({onSubmit}: NewEventFormProps) {
       cep: "",
       nome: "",
       eventDate: eventDefaultDate,
-      ...adressDefaultValues
-    }
+      ...adressDefaultValues,
+    },
   });
 
   const onSubmitInterno = (data: EventFormData) => {
     try {
       console.log("Dados formatados:", data);
-      
+
       toast.success("Evento criado com sucesso!");
-      
+
       methods.reset();
-      onSubmit(data)
+      onSubmit(data);
     } catch (error) {
       toast.error("Algo deu errado, tente novamente mais tarde");
     }
   };
 
   return (
-    <FormProvider {...methods} >
-      <form 
-        onSubmit={methods.handleSubmit(onSubmitInterno)} 
-        style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginInline: 'auto'}}
+    <FormProvider {...methods}>
+      <form
+        onSubmit={methods.handleSubmit(onSubmitInterno)}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          marginInline: "auto",
+        }}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             e.preventDefault(); // Impede o envio acidental
           }
         }}
       >
-        
-        <FormInputField 
+        <FormInputField
           label="Nome do Evento"
           placeholder="Ex: Workshop de React"
           errorMessage={methods.formState?.errors.nome?.message}
           {...methods.register("nome")}
         />
 
-        <FormInputField 
+        <FormInputField
           label="Data"
           type="date"
           errorMessage={methods.formState?.errors.eventDate?.message}
@@ -106,8 +111,8 @@ export default function NewEventForm({onSubmit}: NewEventFormProps) {
 
         <AddressSection />
 
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <FormInputField 
+        <div style={{ display: "flex", gap: "10px" }}>
+          <FormInputField
             label="Preço (R$)"
             type="number"
             step="0.01"
@@ -115,7 +120,7 @@ export default function NewEventForm({onSubmit}: NewEventFormProps) {
             {...methods.register("price", { valueAsNumber: true })}
           />
 
-          <FormInputField 
+          <FormInputField
             label="Vagas"
             type="number"
             errorMessage={methods.formState?.errors.eventCapacity?.message}
